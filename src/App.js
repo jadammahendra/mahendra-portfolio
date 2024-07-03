@@ -1,32 +1,30 @@
-// src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, routes, Routes } from 'react-router-dom';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
-import Projects from './components/Projects';
 import Contact from './components/Contact';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <div className="App">
         <header className="App-header">
           <h1>Welcome to My Portfolio</h1>
         </header>
         <nav>
           <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/projects">Projects</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/notfound">Not Found</Link></li>
           </ul>
         </nav>
         <Routes>
-          <Route path="/" exact component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/projects" component={Projects} />
-          <Route path="/contact" component={Contact} />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </Router>
